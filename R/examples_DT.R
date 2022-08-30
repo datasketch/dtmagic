@@ -135,7 +135,8 @@ DT:: datatable(df) %>% DT::formatStyle(
    )
  )
  
- DT::datatable(
+ 
+  DT::datatable(
    data=iris,
    options = list(options_DT,
      initComplete = DT::JS(
@@ -154,7 +155,7 @@ library(DT)
    #             backgroundColor = styleInterval(3.4, c('yellow', 'gray'))
    # ) %>%
    DT::formatStyle(
-     columns = c(1,2),
+     columns = colnames(iris),
      fontWeight =10,
      color = "gray",
      backgroundColor = "green"

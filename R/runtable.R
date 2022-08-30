@@ -10,9 +10,12 @@ list_opts = list(
   #header events
   list2= list(),
   #colnames style #single pararameter for all
-  table_list_css_column = list(fontWeight=10, color = "gray", backgroundColor = "green")
+  table_list_css_column = list(columns=c(1,2,3,4,5), fontWeight=10, color = "gray", backgroundColor = "green")
   
 )
+
+# list_opts[4]
+# ccs_list_column = utils::modifyList(table_list_css_column[1],list_opts[4])
 
 set_lenguaje <- function(val=character()){
   #TODO get EN by default without loading
@@ -32,15 +35,16 @@ set_lenguaje <- function(val=character()){
 
 #TODO:completer the possible options
 # general_list = list(general_list = list("'language'" = "EN") )
-table_list_css_header = list(table_list_css_default=
+table_list_css_header = list(table_list_css_header=
                                 list("'color'"= "'white'", 
                                      "'background-color'"="'black'",
                                      "'font-size'"="'50%'"))
 
-table_list_css_column = list(table_list_css_default=
-                                list("'color'"= "'white'", 
-                                     "'background-color'"="'black'",
-                                     "'font-size'"="'50%'"))
+table_list_css_column = list(table_list_css_column=
+                                list(columns=c(1,2),
+                                     color= "black", 
+                                     fontWeigh=12,
+                                     backgroundColor = "white"))
 
 
 data_table_ccs_options_string_header= "function(settings, json) {
@@ -62,6 +66,8 @@ paste_header_init <- function(parta = character(), partb=character(), partc=char
    a
   }
  
+as.vector(ccs_list_column$table_list_css_column$columns)
+as.vector()
 #data and list options
 
 #' @export
@@ -75,16 +81,27 @@ runtable <- function(data, opts,...){
   
   
   #HEADER
-   ccs_list_header = utils::modifyList(table_list_css_default[1],inner_opt[2])
+   ccs_list_header = utils::modifyList(table_list_css_header[1],inner_opt[2])
    string_header= paste_keyvalue(ccs_list_header$table_list_css_header)
    Js_init_string= paste_header_init(data_table_ccs_options_string_header,string_header,data_table_ccs_options_string_end)
   
    
-     
+   #Colstyle
+   ccs_list_column = utils::modifyList(table_list_css_column[1],inner_opt[4])
+   string_column= paste_keyvalue(ccs_list_header$table_list_css_column)
+   Js_init_string= paste_header_init(data_table_ccs_options_string_header,string_header,data_table_ccs_options_string_end)
+   
+   
    #RUN data table
    dt= DT::datatable(df, options = list(language =   list(url=lenguage_s),
      initComplete = DT::JS(Js_init_string)
-   ))
+   )) %>% 
+     DT::formatStyle(
+       columns = as.vector(ccs_list_column$table_list_css_column$columns),
+       fontWeight = ccs_list_column$table_list_css_column$fontWeigh,
+       color = ccs_list_column$table_list_css_column$color,
+       backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
+     )
    
    dt
    
