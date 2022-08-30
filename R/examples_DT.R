@@ -13,7 +13,7 @@ DT::datatable(iris, options = list(
 #COLOR BACK
 
 
-DT::datatable(iris, options = list(
+DT::datatable(iris, options = list( language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"),
   initComplete = DT::JS("
     function(settings, json) {
       $(this.api().table().header()).css({
@@ -97,4 +97,42 @@ DT:: datatable(df) %>% DT::formatStyle(
    'V6',
    backgroundColor = styleEqual(c(0, 1), c('red', 'yellow'))
  )
+ 
+ 
+ DT::datatable(head(iris), 
+           options = list(
+             headerCallback = JS(
+               "function(thead, data, start, end, display){",
+               "  $(thead).remove();",
+               "}")
+           )
+ )
+ 
+ 
+ es-Es
+ 
+ options_DT <- list(
+   pageLength = 10,
+   lengthMenu = c(10, 25, 40),
+   language = list(
+     emptyTable = "Cliente no tiene registros en esta sección",
+     zeroRecords = "Cliente no existe. Buscar con otros datos o Agregar cliente",
+     infoEmpty = "Datos no coinciden con ningún registro.",
+     infoFiltered = "(filtrado de un total de _MAX_ registros)",
+     lengthMenu = "Mostrar _MENU_ registros",
+     info = "Mostrando _START_ al _END_ de _TOTAL_ registros",
+     search = "Buscar:",
+     paginate = list(previous = "Anterior",
+                     'next' = "Siguiente")
+   )
+ )
+ 
+ DT::datatable(
+   data=iris,
+   options = list(options_DT,
+     initComplete = DT::JS(
+       "function(settings, json) {",
+       "$(this.api().table().header()).css({'color': '#AAA'});",
+       "}")))
+ 
  
