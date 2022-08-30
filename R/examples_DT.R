@@ -148,16 +148,29 @@ DT:: datatable(df) %>% DT::formatStyle(
  ##style
  library(dplyr)
 library(DT) 
- datatable(iris) %>%
+ dlt =datatable(iris) %>%
    # formatStyle(3, fontWeight = styleInterval(5, c('bold', 'weight'))) %>%
    # formatStyle(2,
    #             color = styleInterval(3.4, c('red', 'white')),
    #             backgroundColor = styleInterval(3.4, c('yellow', 'gray'))
    # ) %>%
-   DT::formatStyle(
+ 
+     DT::formatStyle(
      columns = colnames(iris),
      fontWeight =10,
      color = "gray",
      backgroundColor = "green"
    )
-    
+
+ for(i in 1:2){
+    dlt = dlt %>%
+      DT::formatStyle(
+        columns = i,
+        fontWeight =10,
+        color = "yellow",
+        backgroundColor = "green"
+      )
+ }
+ 
+ dlt
+ 
