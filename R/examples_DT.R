@@ -24,6 +24,14 @@ DT::datatable(iris, options = list( language = list(url = "//cdn.datatables.net/
 ))
 
 
+datatable(iris) %>%
+  formatStyle('Sepal.Length', fontWeight = styleInterval(5, c('bold', 'weight'))) %>%
+  formatStyle('Sepal.Width',
+              color = styleInterval(3.4, c('red', 'white')),
+              backgroundColor = styleInterval(3.4, c('yellow', 'gray'))
+  )
+
+
 #COL TYPES
 df <- data.frame(
   A = rpois(100, 1e4),
@@ -136,3 +144,19 @@ DT:: datatable(df) %>% DT::formatStyle(
        "}")))
  
  
+ ##style
+ library(dplyr)
+library(DT) 
+ datatable(iris) %>%
+   # formatStyle(3, fontWeight = styleInterval(5, c('bold', 'weight'))) %>%
+   # formatStyle(2,
+   #             color = styleInterval(3.4, c('red', 'white')),
+   #             backgroundColor = styleInterval(3.4, c('yellow', 'gray'))
+   # ) %>%
+   DT::formatStyle(
+     columns = c(1,2),
+     fontWeight =10,
+     color = "gray",
+     backgroundColor = "green"
+   )
+    
