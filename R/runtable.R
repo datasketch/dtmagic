@@ -4,9 +4,9 @@
 #TODO pass to prefix instead list(list) - more friendly interaction
 list_opts = list(
   #general options
-  general_list = list(language="ES"),
+  general_list = list(language="ES"), #EN and ES
   #header css
-  table_list_css_header = list("'color'"="'black'", "'background-color'"="'yellow'"),
+  table_list_css_header = list("'color'"="'black'", "'background-color'"="'yellow'"), #color,back,
   #header events
   list2= list(),
   #colnames style #single pararameter for all
@@ -17,10 +17,7 @@ list_opts = list(
   
 )
 
-modifyListNested <-function(lt1=list(),lt2=list()){
-  lsingle= as.list(utils::modifyList(lt1,lt2))
-  lsingle
-}
+#############################################################
 
 # class(list_opts[5])
 # bb=lapply(table_list_css_column_single[1],list_opts[5],FUN=modifyListNested)
@@ -50,6 +47,8 @@ modifyListNested <-function(lt1=list(),lt2=list()){
 # count(lapply(list_opts[5], unique))
 # table(unlist(lapply(list_opts[5], unique)))
 # ccs_list_column = utils::modifyList(table_list_css_column[1],list_opts[4])
+###############################################################################
+#ADD DEFAULT PARAMETERS  FOR: GENERAL, TABLE CSS COLUMN, TABLE CSS COLUMN SINGLE
 
 set_lenguaje <- function(val=character()){
   #TODO get EN by default without loading
@@ -80,19 +79,20 @@ table_list_css_column = list(table_list_css_column=
                                      fontWeigh=12,
                                      backgroundColor = "white"))
 
-
 table_list_css_column_single =list(table_list_css_column_single=
                                list(columns=1,
                                     color= "black", 
                                     fontWeigh=12,
                                     backgroundColor = "white"))
 
-
 data_table_ccs_options_string_header= "function(settings, json) {
   $(this.api().table().header()).css({"
 data_table_ccs_options_string_end=   "});
 }"
 
+
+###########################################################
+#FUNCTIONS
 #list to string / format A:A,B:B 
 paste_keyvalue <- function(alist= list()){
   key= names(alist)
@@ -106,36 +106,49 @@ paste_header_init <- function(parta = character(), partb=character(), partc=char
    a=paste(parta, partb, partc)
    a
   }
- 
+
+
+#FUNCTIONS
+#TODO worst duplicate name 
+modifyListNested <-function(lt1=list(),lt2=list()){
+  lsingle= as.list(utils::modifyList(lt1,lt2))
+  lsingle
+}
+
 # as.vector(ccs_list_column$table_list_css_column$columns)
 # as.vector()
 #data and list options
 
+
+##################################################################
+##MAIN FUNCTION
+
 #' @export
 #' 
 #
+
+
 runtable <- function(data, opts,...){
   inner_opt = opts
-  df = data 
+  df = data
+  
   #GENERAL OPTIONS
   lenguage_s = set_lenguaje(inner_opt[1]$general_list$language)
   
   
-  #HEADER
+   #HEADER
    ccs_list_header = utils::modifyList(table_list_css_header[1],inner_opt[2])
    string_header= paste_keyvalue(ccs_list_header$table_list_css_header)
    Js_init_string= paste_header_init(data_table_ccs_options_string_header,string_header,data_table_ccs_options_string_end)
   
    
-   #Colstyle
+   #Colstyle - ALL
    ccs_list_column = utils::modifyList(table_list_css_column[1],inner_opt[4])
-   # string_column= paste_keyvalue(ccs_list_header$table_list_css_column)
-   # Js_init_string= paste_header_init(data_table_ccs_options_string_header,string_header,data_table_ccs_options_string_end)
-   # 
-  
+   
+   #Colstyle - Single
    ccs_list_column_single = lapply(table_list_css_column_single[1],inner_opt[5],FUN=modifyListNested)
-   #lapply(table_list_css_column_single[1],list_opts[5],FUN=modifyListNested)
     
+   
    #RUN data table
    dt= DT::datatable(df, options = list(language =   list(url=lenguage_s),
      initComplete = DT::JS(Js_init_string)
@@ -151,7 +164,6 @@ runtable <- function(data, opts,...){
    for(i in 1:lengths(list_opts[5])){
      dt = dt %>%
        DT::formatStyle(
-         
          columns =  as.vector(ccs_list_column_single$table_list_css_column_single$table_list_css_column_single[[i]]$columns),
          fontWeight =ccs_list_column_single$table_list_css_column_single$table_list_css_column_single[[i]]$fontWeight,
          color = ccs_list_column_single$table_list_css_column_single$table_list_css_column_single[[i]]$color,
