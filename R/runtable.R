@@ -6,21 +6,21 @@
 #TODO improve nested 
 #TODO add try catch
 
-
-list_opts = list(
-  #general options
-  general_list = list(language="ES"), #EN and ES
-  #header css
-  table_list_css_header = list("'color'"="'black'", "'background-color'"="'yellow'"), #color,back,
-  #header events
-  list2= list(),
-  #colnames style #single pararameter for all
-  table_list_css_column= list(columns=c(1,2,3,4,5),  currency = "$", fontWeight=10, color = "gray", backgroundColor = "green"),
-  table_list_css_column_single = list(
-                            list(columns=c(1), fontWeight=10, color = "yellow", backgroundColor = "green"),
-                            list(columns=c(2), fontWeight=10, color = "black", backgroundColor = "green"))
-  
-)
+# 
+# list_opts = list(
+#   #general options
+#   general_list = list(language="ES"), #EN and ES
+#   #header css
+#   table_list_css_header = list("'color'"="'black'", "'background-color'"="'yellow'"), #color,back,
+#   #header events
+#   list2= list(),
+#   #colnames style #single pararameter for all
+#   table_list_css_column= list(columns=c(1,2,3,4,5),  currency = "$", fontWeight=10, color = "gray", backgroundColor = "green"),
+#   table_list_css_column_single = list(
+#                             list(columns=c(1), fontWeight=10, color = "yellow", backgroundColor = "green"),
+#                             list(columns=c(2), fontWeight=10, color = "black", backgroundColor = "green"))
+#   
+# )
 
 #############################################################
 ###############################################################################
@@ -101,10 +101,15 @@ modifyListNested <-function(lt1=list(),lt2=list()){
 ##################################################################
 ##MAIN FUNCTION
 
+#' Load a dataframe  + list options: general_list +  table_list_css_header + list2 not implemented +  table_list_css_column + table_list_css_column_single
+#'  
+#' This function loads a dataframe and option list
+#'
+#' @param data  Dataframe
+#' @param list List of list, see the structure examples (nested)
+#' @return Datatable 
 #' @export
-#' 
-#
-
+#' @importFrom dplyr %>%
 runtable <- function(data, opts,...){
   inner_opt = opts
   df = data
@@ -137,7 +142,7 @@ runtable <- function(data, opts,...){
        backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
      )
    
-  
+  #ADD single stylecolumns
    for(i in 1:lengths(list_opts[5])){
      dt = dt %>%
        DT::formatStyle(
@@ -152,4 +157,4 @@ dt
 }
 
 
-runtable(iris,list_opts)
+# runtable(iris,list_opts)
