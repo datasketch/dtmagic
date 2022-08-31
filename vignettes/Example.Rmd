@@ -25,10 +25,10 @@ list_opts = list(
   #header events
   list2= list(),
   #colnames style #single pararameter for all
-  table_list_css_column= list(columns=c(1,2,3,4,5),  currency = "$", fontWeight=10, color = "gray", backgroundColor = "green"),
+  table_list_css_column= list(columns=c(1,2,3,4,5), fontWeight="normal", color = "gray", backgroundColor = "green"),
   table_list_css_column_single = list(
-                            list(columns=c(1), fontWeight=10, color = "yellow", backgroundColor = "green"),
-                            list(columns=c(2), fontWeight=10, color = "black", backgroundColor = "green"))
+                            list(columns=c(1),  fontWeight="normal", color = "yellow", backgroundColor = "green"),
+                            list(columns=c(2),  fontWeight="normal", color = "black", backgroundColor = "green"))
 
 )
 
