@@ -156,19 +156,13 @@ library(DT)
    interval = 5
    
  )   %>%
-   # formatStyle(3, fontWeight = styleInterval(5, c('bold', 'weight'))) %>%
-   # formatStyle(2,
-   #             color = styleInterval(3.4, c('red', 'white')),
-   #             backgroundColor = styleInterval(3.4, c('yellow', 'gray'))
-   # ) %>%
- 
-     DT::formatStyle(
+   DT::formatStyle(
      columns = colnames(iris),
      fontWeight =10,
      color = "gray",
      backgroundColor = "green"
-   )
-
+   )  %>%
+   formatString(columns = c(1,2,5), prefix = "a_", suffix = "", rows = c(1))
  dlt
  for(i in 1:2){
     dlt = dlt %>%
@@ -211,4 +205,41 @@ library(DT)
  # count(lapply(list_opts[5], unique))
  # table(unlist(lapply(list_opts[5], unique)))
  # ccs_list_column = utils::modifyList(table_list_css_column[1],list_opts[4])
+ 
+ list1=list(table_list_css_column_single = list(a=1,b=2,c=3))
+ list1a=list(table_list_css_column_single =  list(a=5,c=3))
+ list2=list(lab=list(),table_list_css_column_single = list(list(a=1,c=6),  list(a=1,b=2,c=4)))
+ ll = list2[[2]][2]
+ utils::modifyList
+ utils::modifyList(list1,list1a)
+ class(ll)
+ class(list1)
+ list2[[1]]$a
+ lapply( list1,ll,FUN=modifyListNested )
+ b=list()
+ d=(list2[2])
+ list1
+ for(i in 1:lengths(d)){
+   # print("i")
+   # print(i)
+   # print("d")
+   dd=d[[1]][[i]]
+   dd = list(table_list_css_column_single=dd)
+   # names(d[[1]][[1]])=c(rep("table_list_css_column_single")
+   # d$table_list_css_column_single[1]
+   
+   new=utils::modifyList(list1,dd)
+   # new=utils::modifyList(list1,d[[1]][i])
+    print("b")
+    print(b)
+    print("new")
+    print(new)
+   b=append(b,new)
+ }
+ b
+ modifyListNested <-function(lt1=list(),lt2=list()){
+   lsingle= as.list(utils::modifyList(lt1,lt2))
+   lsingle
+ }
+ 
  

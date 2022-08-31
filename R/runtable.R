@@ -56,13 +56,17 @@ table_list_css_column = list(table_list_css_column=
                                 list(columns=c(1,2),
                                      color= "black", 
                                      fontWeight="normal",
-                                       backgroundColor = "white"))
+                                     backgroundColor = "white",
+                                     prefix="",
+                                     suffix=""))
 
 table_list_css_column_single =list(table_list_css_column_single=
                                list(columns=1,
                                     color= "black", 
                                     fontWeight="normal",
-                                    backgroundColor = "white"))
+                                    backgroundColor = "white",
+                                    prefix="",
+                                    suffix=""))
 
 data_table_ccs_options_string_header= "function(settings, json) {
   $(this.api().table().header()).css({"
@@ -89,10 +93,32 @@ paste_header_init <- function(parta = character(), partb=character(), partc=char
 
 
 #FUNCTIONS
-#TODO  duplicate nested
+#TODO  fixed nested #only works for col single style
 modifyListNested <-function(lt1=list(),lt2=list()){
-  lsingle= as.list(utils::modifyList(lt1,lt2))
-  lsingle
+  #lsingle= as.list(utils::modifyList(lt1,lt2))
+  #lsingle
+  d=lt2
+  b=list()
+  
+  for(i in 1:lengths(lt2)){
+    # print("i")
+    # print(i)
+    # print("d")
+    dd=d[[1]][[i]]
+    dd = list(table_list_css_column_single=dd)
+    # names(d[[1]][[1]])=c(rep("table_list_css_column_single")
+    # d$table_list_css_column_single[1]
+    
+    new=utils::modifyList(lt1,dd)
+    # new=utils::modifyList(list1,d[[1]][i])
+    # print("b")
+    # print(b)
+    # print("new")
+    # print(new)
+    b=append(b,new)
+  }
+  b
+  
 }
 
 # as.vector(ccs_list_column$table_list_css_column$columns)
@@ -136,9 +162,10 @@ runtable <- function(data, opts=NULL,...){
      ccs_list_column = utils::modifyList(table_list_css_column[1],inner_opt[4])
    } else{ ccs_list_column = table_list_css_column[1] }
    
-   #Colstyle - Single
+     #Colstyle - Single
    if(!is.null(inner_opt[5]) & length(inner_opt[5]$table_list_css_column_single) &  class(inner_opt[5]$table_list_css_column_single)=="list" ){
-     ccs_list_column_single = lapply(table_list_css_column_single[1],inner_opt[5],FUN=modifyListNested)
+     # names(inner_opt[5]) = seq(1:length(inner_opt[5]))
+     ccs_list_column_single =  modifyListNested(table_list_css_column_single[1],inner_opt[5])#lapply(table_list_css_column_single[1],inner_opt[5],FUN=modifyListNested)
    } else{ ccs_list_column_single = table_list_css_column_single[1] } 
   #library(dplyr) 
    #RUN data table
@@ -150,19 +177,26 @@ runtable <- function(data, opts=NULL,...){
        fontWeight = ccs_list_column$table_list_css_column$fontWeight,
        color = ccs_list_column$table_list_css_column$color,
        backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
-     )
-  dt 
+     )   %>% DT::formatString(columns =as.vector(ccs_list_column$table_list_css_column$columns),
+                          prefix = ccs_list_column$table_list_css_column$prefix,
+                          suffix =ccs_list_column$table_list_css_column$suffix)
+   
   #ADD single stylecolumns - TODO only do if oprs is !=NULL
    if(!is.null(inner_opt[5]) & length(inner_opt[5]$table_list_css_column_single) & class(inner_opt[5]$table_list_css_column_single)=="list"){
        for(i in 1:lengths(inner_opt[5])){
+         print(i)
          dt = dt %>%
-           DT::formatStyle(#TODO fix double nested
-             columns =  as.vector(ccs_list_column_single$table_list_css_column_single$table_list_css_column_single[[i]]$columns),
-             fontWeight =ccs_list_column_single$table_list_css_column_single$table_list_css_column_single[[i]]$fontWeight,
-             color = ccs_list_column_single$table_list_css_column_single$table_list_css_column_single[[i]]$color,
-             backgroundColor = ccs_list_column_single$table_list_css_column_single$table_list_css_column_single[[i]]$backgroundColor
-           )
-       }
+           DT::formatStyle(#TODO fixed ouble nested
+             columns =  as.vector(ccs_list_column_single[[i]]$columns),
+             fontWeight =ccs_list_column_single[[i]]$fontWeight,
+             color = ccs_list_column_single[[i]]$color,
+             backgroundColor = ccs_list_column_single[[i]]$backgroundColor
+           )  %>% 
+           DT::formatString(columns =as.vector(ccs_list_column_single[[i]]$columns),
+                          prefix = ccs_list_column_single[[i]]$prefix,
+                          suffix =ccs_list_column_single[[i]]$suffix)
+          
+       } 
    }
 dt   
    
