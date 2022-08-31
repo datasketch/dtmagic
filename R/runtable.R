@@ -55,13 +55,13 @@ table_list_css_header = list(table_list_css_header=
 table_list_css_column = list(table_list_css_column=
                                 list(columns=c(1,2),
                                      color= "black", 
-                                     fontWeight=12,
+                                     fontWeight="normal",
                                        backgroundColor = "white"))
 
 table_list_css_column_single =list(table_list_css_column_single=
                                list(columns=1,
                                     color= "black", 
-                                    fontWeight=12,
+                                    fontWeight="normal",
                                     backgroundColor = "white"))
 
 data_table_ccs_options_string_header= "function(settings, json) {
@@ -89,7 +89,7 @@ paste_header_init <- function(parta = character(), partb=character(), partc=char
 
 
 #FUNCTIONS
-#TODO worst duplicate name 
+#TODO  duplicate nested
 modifyListNested <-function(lt1=list(),lt2=list()){
   lsingle= as.list(utils::modifyList(lt1,lt2))
   lsingle

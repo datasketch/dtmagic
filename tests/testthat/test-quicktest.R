@@ -80,10 +80,10 @@ test_that("empty options 6 -general cols -select first", {
   list_opt= list( general_list = list(language="EN"),
                   table_list_css_header = list("'color'"="'gray'", "'background-color'"="'green'", "'font-size'"="'75%'"), #color,back,
                   table_list_css_events=list(), #not implemented yet
-                  table_list_css_column= list(columns=c(1,2),  fontWeight=3, color = "yellow", backgroundColor = "green"),
+                  table_list_css_column= list(columns=c(1,2),  fontWeight="normal", color = "yellow", backgroundColor = "green"),
                   table_list_css_column_single = list(
-                                              list(columns=c(3), fontWeight=10, color = "orange", backgroundColor = "green"),
-                                              list(columns=c(4), fontWeight=12, color = "black", backgroundColor = "green"))
+                                              list(columns=c(3), fontWeight="bold", color = "orange", backgroundColor = "green"),
+                                              list(columns=c(4), fontWeight="normal", color = "black", backgroundColor = "green"))
 
                   )
                   
