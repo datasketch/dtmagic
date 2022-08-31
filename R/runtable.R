@@ -2,6 +2,11 @@
 
 #TODO string, automatic paste '' to de option that need css
 #TODO pass to prefix instead list(list) - more friendly interaction
+#TODO the order list's is important
+#TODO improve nested 
+#TODO add try catch
+
+
 list_opts = list(
   #general options
   general_list = list(language="ES"), #EN and ES
@@ -10,7 +15,7 @@ list_opts = list(
   #header events
   list2= list(),
   #colnames style #single pararameter for all
-  table_list_css_column= list(columns=c(1,2,3,4,5), fontWeight=10, color = "gray", backgroundColor = "green"),
+  table_list_css_column= list(columns=c(1,2,3,4,5),  currency = "$", fontWeight=10, color = "gray", backgroundColor = "green"),
   table_list_css_column_single = list(
                             list(columns=c(1), fontWeight=10, color = "yellow", backgroundColor = "green"),
                             list(columns=c(2), fontWeight=10, color = "black", backgroundColor = "green"))
@@ -18,38 +23,8 @@ list_opts = list(
 )
 
 #############################################################
-
-# class(list_opts[5])
-# bb=lapply(table_list_css_column_single[1],list_opts[5],FUN=modifyListNested)
-# bb$table_list_css_column_single$table_list_css_column_single[[2]]$columns
-# # list_opts[5]$table_list_css_column_single[2]
-# lengths(list_opts[5])
-# List <- list()
-# for(i in 1:lengths(list_opts[5])) {
-#   
-#   print(list_opts[5]$table_list_css_column_single[[i]]$columns)
-# }
-# 
-#   List <- list()
-# #Compute
-# for (colname in colnames(df)) {
-#   
-#   List[[colname]]<- df %>%
-#     group_by(df[,colname]) %>%
-#     count() %>%
-#     arrange(desc(n))
-#   
-# }
-# #Print
-# List  
-#   
-  
-# count(lapply(list_opts[5], unique))
-# table(unlist(lapply(list_opts[5], unique)))
-# ccs_list_column = utils::modifyList(table_list_css_column[1],list_opts[4])
 ###############################################################################
-#ADD DEFAULT PARAMETERS  FOR: GENERAL, TABLE CSS COLUMN, TABLE CSS COLUMN SINGLE
-
+#ADD new language
 set_lenguaje <- function(val=character()){
   #TODO get EN by default without loading
   #add list
@@ -66,6 +41,8 @@ set_lenguaje <- function(val=character()){
 }  
 
 
+
+#ADD DEFAULT PARAMETERS  FOR: GENERAL, TABLE CSS COLUMN, TABLE CSS COLUMN SINGLE
 #TODO:completer the possible options
 # general_list = list(general_list = list("'language'" = "EN") )
 table_list_css_header = list(table_list_css_header=
@@ -77,7 +54,7 @@ table_list_css_column = list(table_list_css_column=
                                 list(columns=c(1,2),
                                      color= "black", 
                                      fontWeigh=12,
-                                     backgroundColor = "white"))
+                                       backgroundColor = "white"))
 
 table_list_css_column_single =list(table_list_css_column_single=
                                list(columns=1,
@@ -87,6 +64,7 @@ table_list_css_column_single =list(table_list_css_column_single=
 
 data_table_ccs_options_string_header= "function(settings, json) {
   $(this.api().table().header()).css({"
+
 data_table_ccs_options_string_end=   "});
 }"
 
@@ -127,7 +105,6 @@ modifyListNested <-function(lt1=list(),lt2=list()){
 #' 
 #
 
-
 runtable <- function(data, opts,...){
   inner_opt = opts
   df = data
@@ -153,7 +130,7 @@ runtable <- function(data, opts,...){
    dt= DT::datatable(df, options = list(language =   list(url=lenguage_s),
      initComplete = DT::JS(Js_init_string)
    )) %>% 
-     DT::formatStyle(
+     DT::formatStyle( #CSS style to columns
        columns = as.vector(ccs_list_column$table_list_css_column$columns),
        fontWeight = ccs_list_column$table_list_css_column$fontWeight,
        color = ccs_list_column$table_list_css_column$color,

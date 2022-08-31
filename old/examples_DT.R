@@ -146,9 +146,16 @@ DT:: datatable(df) %>% DT::formatStyle(
  
  
  ##style
- library(dplyr)
+library(dplyr)
 library(DT) 
- dlt =datatable(iris) %>%
+ dlt =datatable(iris) %>% 
+
+   DT::formatCurrency(
+   columns =  colnames(iris),
+   currency = "",
+   interval = 5
+   
+ )   %>%
    # formatStyle(3, fontWeight = styleInterval(5, c('bold', 'weight'))) %>%
    # formatStyle(2,
    #             color = styleInterval(3.4, c('red', 'white')),
@@ -162,6 +169,7 @@ library(DT)
      backgroundColor = "green"
    )
 
+ dlt
  for(i in 1:2){
     dlt = dlt %>%
       DT::formatStyle(
@@ -173,4 +181,34 @@ library(DT)
  }
  
  dlt
+
+ 
+ # class(list_opts[5])
+ # bb=lapply(table_list_css_column_single[1],list_opts[5],FUN=modifyListNested)
+ # bb$table_list_css_column_single$table_list_css_column_single[[2]]$columns
+ # # list_opts[5]$table_list_css_column_single[2]
+ # lengths(list_opts[5])
+ # List <- list()
+ # for(i in 1:lengths(list_opts[5])) {
+ #   
+ #   print(list_opts[5]$table_list_css_column_single[[i]]$columns)
+ # }
+ # 
+ #   List <- list()
+ # #Compute
+ # for (colname in colnames(df)) {
+ #   
+ #   List[[colname]]<- df %>%
+ #     group_by(df[,colname]) %>%
+ #     count() %>%
+ #     arrange(desc(n))
+ #   
+ # }
+ # #Print
+ # List  
+ #   
+ 
+ # count(lapply(list_opts[5], unique))
+ # table(unlist(lapply(list_opts[5], unique)))
+ # ccs_list_column = utils::modifyList(table_list_css_column[1],list_opts[4])
  
