@@ -6,7 +6,7 @@
 
 This function loads a dataframe and option list}
 \usage{
-runtable(data, opts, ...)
+runtable(data, opts = NULL, ...)
 }
 \arguments{
 \item{data}{Dataframe}
