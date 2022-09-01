@@ -98,7 +98,7 @@ test_that("sufix -prefix cols", {
                   table_list_css_column= list(columns=c(1,2), prefix="a", fontWeight="normal", color = "yellow", backgroundColor = "green"),
                   table_list_css_column_single = list(
                     list(columns=c(3), prefix="not",fontWeight="bold", color = "orange", backgroundColor = "green"),
-                    list(columns=c(4), fontWeight="normal", color = "black", backgroundColor = "green"))
+                    list(columns=c(4), suffix="yes",fontWeight="normal", color = "black", backgroundColor = "green"))
                   
   )
   

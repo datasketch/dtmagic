@@ -11,7 +11,7 @@ runtable(data, opts = NULL, ...)
 \arguments{
 \item{data}{Dataframe}
 
-\item{list}{List of list, see the structure examples (nested)}
+\item{opts}{List of list, see the structure examples (nested)}
 }
 \value{
 Datatable

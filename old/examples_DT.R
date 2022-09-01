@@ -146,24 +146,24 @@ DT:: datatable(df) %>% DT::formatStyle(
  
  
  ##style
-library(dplyr)
-library(DT) 
- dlt =datatable(iris) %>% 
-
-   DT::formatCurrency(
-   columns =  colnames(iris),
-   currency = "",
-   interval = 5
-   
- )   %>%
-   DT::formatStyle(
-     columns = colnames(iris),
-     fontWeight =10,
-     color = "gray",
-     backgroundColor = "green"
-   )  %>%
-   formatString(columns = c(1,2,5), prefix = "a_", suffix = "", rows = c(1))
- dlt
+    library(dplyr)
+    library(DT) 
+     dlt =datatable(iris) %>% 
+    
+       DT::formatCurrency(
+       columns =  colnames(iris),
+       currency = "",
+       interval = 5
+       
+     )   %>%
+       DT::formatStyle(
+         columns = colnames(iris),
+         fontWeight =10,
+         color = "gray",
+         backgroundColor = "green"
+       )  %>%
+       DT::formatString(columns = c(1,2,5), prefix = "a_", suffix = "e")
+     dlt
  for(i in 1:2){
     dlt = dlt %>%
       DT::formatStyle(
