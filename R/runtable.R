@@ -40,13 +40,17 @@
 #' @export
 #' @importFrom dplyr %>%
 runtable <- function(data, opts=NULL,...){
-  inner_opt = opts
+  inner_opt = mapper(opts)
   df = data  
   
   #GENERAL OPTIONS
   if(!is.null(inner_opt[1]$general_list$language) & length(inner_opt[1]$general_list)){
     lenguage_s = set_lenguaje(inner_opt[1]$general_list$language)
   } else{lenguage_s  = ""}
+  
+  if(!is.null(inner_opt[1]$general_list) & length(inner_opt[1]$general_list)){
+    general_list = utils::modifyList(table_general_list[1],inner_opt[1])
+  } else{general_list = table_general_list[1]}
   
    #HEADER
    if(!is.null(inner_opt[2]) & length(inner_opt[2]$table_list_css_header)  & class(inner_opt[2]$table_list_css_header)=="list"){
@@ -70,7 +74,7 @@ runtable <- function(data, opts=NULL,...){
    } else{ ccs_list_column_single = table_list_css_column_single[1] } 
   #library(dplyr) 
    #RUN data table
-   dt= DT::datatable(df, options = list(language =   list(url=lenguage_s),
+   dt= DT::datatable(df, width = general_list$table_general_list$width, options = list(language =   list(url=lenguage_s), 
      initComplete = DT::JS(Js_init_string)
    )) %>% 
      DT::formatStyle( #CSS style to columns

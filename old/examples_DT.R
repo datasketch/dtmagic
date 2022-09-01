@@ -243,3 +243,5 @@ DT:: datatable(df) %>% DT::formatStyle(
  }
  
  
+ DT::datatable(iris,width='50%') %>%  DT::formatStyle(colnames(iris),fontWeight='auto')
+ 
