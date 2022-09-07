@@ -48,7 +48,7 @@ runtable <- function(data, opts=NULL,...){
     lenguage_s = set_lenguaje(inner_opt[1]$general_list$language)
   } else{lenguage_s  = ""}
   
-  if(!is.null(inner_opt[1]$general_list) & length(inner_opt[1]$general_list)){
+   if(!is.null(inner_opt[1]$general_list) & length(inner_opt[1]$general_list)){
     general_list = utils::modifyList(general_list[1],inner_opt[1])
   } else{general_list = general_list[1]}
   
@@ -74,7 +74,7 @@ runtable <- function(data, opts=NULL,...){
    } else{ ccs_list_column_single = table_list_css_column_single[1] } 
   #library(dplyr) 
    #RUN data table
-   dt= DT::datatable(df, width = general_list$general_list$width,height= general_list$general_list$height, options = list(language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
+     dt= DT::datatable(df, filter=general_list$general_list$filter,width = general_list$general_list$width,height= general_list$general_list$height, options = list(language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
      initComplete = DT::JS(Js_init_string)
    )) %>% 
      DT::formatStyle( #CSS style to columns
@@ -87,7 +87,7 @@ runtable <- function(data, opts=NULL,...){
                           suffix =ccs_list_column$table_list_css_column$suffix)
    
     dt
-   #ADD single stylecolumns - TODO only do if oprs is !=NULL
+     #ADD single stylecolumns - TODO only do if oprs is !=NULL
    if(!is.null(inner_opt[5]) & length(inner_opt[5]$table_list_css_column_single) & class(inner_opt[5]$table_list_css_column_single)=="list"){
        for(i in 1:lengths(inner_opt[5])){
          print(i)
