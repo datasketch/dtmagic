@@ -1,16 +1,16 @@
 #from https://github.com/datasketch/dsvizopts/blob/master/R/options.R
 #Human behavior inputs
 tableOpts =list(
-  groupBy = NULL,
-  sortable = FALSE,
+  groupBy = NULL, #not implemented
+  sortable = TRUE,
   resizable = FALSE,
   filterable = FALSE, #"none", "bottom", "top"
   searchable = TRUE,
   selection = NULL, #list("Sepal.Length", "Species"),  #list input with colnames or NIULL
-  showSortIcon = TRUE,
-  showSortable =  TRUE,
+  showSortIcon = TRUE, #?
+  showSortable =  TRUE, #?
   height = "auto",
-  font_wheight ="auto",
+  font_wheight ="bold", #auto  default, option  bold
   width = "auto",
   fullWidth = TRUE,
   wrap = TRUE,
@@ -72,6 +72,9 @@ tableOpts$height
   list_opts$general_list[["ordering"]] =tableOpts$sortable
   list_opts$general_list[["searching"]] =tableOpts$searchable
   list_opts$general_list[["selection"]]  =tableOpts$selection
+  if(tableOpts$font_wheight == "auto"){
+    list_opts$table_list_css_column[["fontWeight"]]="normal"
+  }else{list_opts$table_list_css_column[["fontWeight"]]=tableOpts$font_wheight }
   # print("seledction")
   # print(tableOpts$selection)
   # print(list_opts$general_list[["selection"]])

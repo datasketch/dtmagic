@@ -89,7 +89,7 @@ runtable <- function(data, opts=NULL,...){
      initComplete = DT::JS(Js_init_string)
    )) %>% 
      DT::formatStyle( #CSS style to columns
-       columns = as.vector(ccs_list_column$table_list_css_column$columns),
+       columns = colnames(df),#as.vector(ccs_list_column$table_list_css_column$columns),
        fontWeight = ccs_list_column$table_list_css_column$fontWeight,
        color = ccs_list_column$table_list_css_column$color,
        backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
@@ -97,7 +97,7 @@ runtable <- function(data, opts=NULL,...){
                           prefix = ccs_list_column$table_list_css_column$prefix,
                           suffix =ccs_list_column$table_list_css_column$suffix)
    
-      #dt
+      dt
      #ADD single stylecolumns - TODO only do if oprs is !=NULL
    if(!is.null(inner_opt[5]) & length(inner_opt[5]$table_list_css_column_single) & class(inner_opt[5]$table_list_css_column_single)=="list"){
        for(i in 1:lengths(inner_opt[5])){
