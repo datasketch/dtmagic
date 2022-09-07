@@ -142,8 +142,11 @@ df
   
   
     #class='hover cell-border stripe',
-      a= list("compact","hover")
-DT::datatable(iris,class=a)
+      a= list("wrap")
+      
+    mm=  data.frame(a=c("ffffffff ffffffffffff  ffffffffffffffffffffffffffffffffffffffffffff", 4000),b=c(45.55677,4545))
+DT::datatable(mm) %>%
+DT::formatStyle(colnames(mm),white-space="nowrap")
 
   DT::formatStyle(colnames(iris),borderTop=DT::styleEqual(22.8,"5px solid red"))
   DT::formatStyle(colnames(iris), fontWeight ='bold',border = '1px solid black')

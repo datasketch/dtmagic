@@ -13,7 +13,7 @@ tableOpts =list(
   font_wheight ="bold", #auto  default, option  bold
   width = "auto",
   fullWidth = TRUE, #??
-  wrap = TRUE, #??
+  wrap = FALSE, 
   outlined = FALSE, #?'
   bordered = FALSE, #??
   borderless = TRUE, #??
@@ -75,9 +75,15 @@ tableOpts$height
   list_opts$general_list[["stripe"]]  =tableOpts$striped
   list_opts$general_list[["compact"]]  =tableOpts$compact
   
-    if(tableOpts$font_wheight == "auto"){
+  if(tableOpts$font_wheight == "auto"){
     list_opts$table_list_css_column[["fontWeight"]]="normal"
   }else{list_opts$table_list_css_column[["fontWeight"]]=tableOpts$font_wheight }
+  
+  if(tableOpts$wrap == TRUE){
+    list_opts$table_list_css_column[["wrap"]]="wrap"
+  }else{list_opts$table_list_css_column[["wrap"]]="nowrap" }
+  
+  
   # print("seledction")
   # print(tableOpts$selection)
   # print(list_opts$general_list[["selection"]])

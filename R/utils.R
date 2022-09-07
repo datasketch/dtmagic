@@ -22,7 +22,8 @@ set_lenguaje <- function(val=character()){
 #TODO:completer the possible options
 # general_list = list(general_list = list("'language'" = "EN") )
 general_list = list(general_list=list(width='auto', height='auto', ordering=TRUE,
-                                      filter="none", searching=TRUE, stripe=TRUE, compact=FALSE))
+                                      filter="none", searching=TRUE, stripe=TRUE, 
+                                      compact=FALSE))
 
 table_list_css_header = list(table_list_css_header=
                                list("'color'"= "'white'", 
@@ -35,7 +36,8 @@ table_list_css_column = list(table_list_css_column=
                                     fontWeight="normal",
                                     backgroundColor = "white",
                                     prefix="",
-                                    suffix=""))
+                                    suffix="",
+                                    wrap="wrap"))
 
 table_list_css_column_single =list(table_list_css_column_single=
                                      list(columns=1,

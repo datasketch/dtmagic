@@ -62,7 +62,7 @@ inner_opt = mapper(opts)
     general_list = utils::modifyList(general_list[1],inner_opt[1])
   } else{general_list = general_list[1]}
   
-  #CLASS GENERAL
+  #CLASS GENERAL - TODO create fucnction for list class
   if(general_list$general_list$stripe ==TRUE){
     list_class = append(list_class,"stripe")
   }
@@ -86,6 +86,8 @@ inner_opt = mapper(opts)
      ccs_list_column = utils::modifyList(table_list_css_column[1],inner_opt[4])
    } else{ ccs_list_column = table_list_css_column[1] }
    
+ 
+   
      #Colstyle - Single
    if(!is.null(inner_opt[5]) & length(inner_opt[5]$table_list_css_column_single) &  class(inner_opt[5]$table_list_css_column_single)=="list" ){
      # names(inner_opt[5]) = seq(1:length(inner_opt[5]))
@@ -93,7 +95,8 @@ inner_opt = mapper(opts)
    } else{ ccs_list_column_single = table_list_css_column_single[1] } 
   #library(dplyr) 
    #RUN data table
-
+   
+   
  if(length(list_class) >0){       
      dt = DT::datatable(df, class = unlist(list_class), filter=general_list$general_list$filter,width = general_list$general_list$width,height= general_list$general_list$height, 
                            options = list(language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
@@ -104,12 +107,13 @@ inner_opt = mapper(opts)
            columns = colnames(df),#as.vector(ccs_list_column$table_list_css_column$columns),
            fontWeight = ccs_list_column$table_list_css_column$fontWeight,
            color = ccs_list_column$table_list_css_column$color,
+           "white-space"=ccs_list_column$table_list_css_column$wrap,
            backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
          )   %>% DT::formatString(columns =as.vector(ccs_list_column$table_list_css_column$columns),
                               prefix = ccs_list_column$table_list_css_column$prefix,
                               suffix =ccs_list_column$table_list_css_column$suffix)
        
- }
+ dt}
     else{
       
       dt = DT::datatable(df,  filter=general_list$general_list$filter,width = general_list$general_list$width,height= general_list$general_list$height, 
@@ -121,6 +125,7 @@ inner_opt = mapper(opts)
           columns = colnames(df),#as.vector(ccs_list_column$table_list_css_column$columns),
           fontWeight = ccs_list_column$table_list_css_column$fontWeight,
           color = ccs_list_column$table_list_css_column$color,
+          "white-space"=ccs_list_column$table_list_css_column$wrap,
           backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
         )   %>% DT::formatString(columns =as.vector(ccs_list_column$table_list_css_column$columns),
                                  prefix = ccs_list_column$table_list_css_column$prefix,
