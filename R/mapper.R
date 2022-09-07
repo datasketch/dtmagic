@@ -2,7 +2,7 @@
 #Human behavior inputs
 tableOpts <- list(
   groupBy = NULL,
-  sortable = TRUE,
+  sortable = FALSE,
   resizable = FALSE,
   filterable = FALSE,
   searchable = FALSE,
@@ -29,11 +29,31 @@ tableOpts <- list(
   pageSizeOptions = c(10, 25, 50, 100)
 )
 
+
+
+
+# a custom table container
+# sketch = htmltools::withTags(table(
+#   class = 'display',
+#   thead(
+#     tr(
+#       th(rowspan = 2, 'Species'),
+#       th(colspan = 2, 'Sepal'),
+#       th(colspan = 2, 'Petal')
+#     ),
+#     tr(
+#       lapply(rep(c('Length', 'Width'), 2), th)
+#     )
+#   )
+# ))
+# print(sketch)
+
 tableOpts$height
 mapper <- function(tableOpts){ 
+  
   list_opts = list(
     #general options
-    table_general_list = list(tableOpts$height), #EN and ES
+    general_list = list(), #EN and ES
     #header css
     table_list_css_header = list(),#list("'color'"="'black'", "'background-color'"="'yellow'"), #color,back,
     #header events
@@ -47,8 +67,11 @@ mapper <- function(tableOpts){
     
   )
   
-  list_opts$table_general_list[["width"]] =tableOpts$width
-  list_opts$table_general_list[["height"]] =tableOpts$height
+  list_opts$general_list[["width"]] =tableOpts$width
+  list_opts$general_list[["height"]] =tableOpts$height
+  list_opts$general_list[["ordering"]] =tableOpts$sortable
+  
+  
   list_opts
   print(list_opts)
 }

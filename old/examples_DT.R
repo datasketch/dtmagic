@@ -1,9 +1,85 @@
 #Testing DT examples
 library(dplyr)
 DT::datatable(iris) 
+# a custom table container
+print(sketch)
 
 
-#library(DT)
+
+a=list( th(rowspan = 2, 'Species'),
+       th(colspan = 2, 'Sepal'),
+       th(colspan = 2, 'Petal'))
+
+
+sketch = htmltools::withTags(table(
+  class = 'display',
+  thead(
+    tr(
+      lapply(rep(c('Sepal', 'Length'), 2), th)
+      
+        # lapply(rep(rep(c('Sepal'),2),rep(c('Petal'),2), 1), th)
+      ),
+    tr(
+      lapply(rep(c('Length', 'Width'), 2), th)
+    )
+  )
+))
+
+
+sketch = htmltools::withTags(table(
+  class = 'display',
+  thead(
+    tr(
+      renderText("th(rowspan = 2, 'Species')")
+    ),
+    tr(
+      lapply(rep(c('Length', 'Width'), 2), th)
+    )
+  )
+))
+      print(sketch)
+class(sketch)
+
+create_sketch  <- function(var_group, var_grouped){
+  var_group=c("Sepal","Petal")
+  sketch = htmltools::withTags(table(
+    class = 'display',
+    thead(
+      for(i in 1:length(var_group)){
+       paste(" <th rowspan='2'>",var_group[i],"</th>")
+        }
+    )
+  ))
+  
+}
+
+
+head=""
+for(i in 1:length(var_group)){
+  head=paste(head,paste(" <th rowspan='2'>",var_group[i],"</th>"))
+}
+head
+str="<table class='display'>
+  <thead>
+  <tr>
+    <th rowspan='2'> Sepal </th>  
+    <th rowspan='2'> Petal </th> 
+  </tr>
+  </tr>
+  <tr>
+  <th>Length</th>
+  <th>Width</th>
+  <th>Length</th>
+  <th>Width</th>
+  </tr>
+  </thead>
+  </table>"
+  library(stringr)
+str=str_replace_all(str,"\n","")
+
+    DT::datatable(iris, container = sketch , rownames = FALSE)
+
+  #library(DT)
 DT::datatable(iris, options = list(
   searching = FALSE,
   pageLength = 5,
@@ -61,7 +137,7 @@ DT::datatable(iris) %>% DT::formatStyle(
 
  DT::datatable(
   data=iris,
-  options = list(
+  options = list(ordering=FALSE,
     initComplete = DT::JS(
       "function(settings, json) {",
       "$(this.api().table().header()).css({'color': '#AAA'});",

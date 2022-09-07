@@ -21,7 +21,7 @@ set_lenguaje <- function(val=character()){
 #ADD DEFAULT PARAMETERS  FOR: GENERAL, TABLE CSS COLUMN, TABLE CSS COLUMN SINGLE
 #TODO:completer the possible options
 # general_list = list(general_list = list("'language'" = "EN") )
-table_general_list = list(general_list=list(width='auto', height='auto'))
+general_list = list(general_list=list(width='auto', height='auto', ordering=TRUE))
 
 table_list_css_header = list(table_list_css_header=
                                list("'color'"= "'white'", 
