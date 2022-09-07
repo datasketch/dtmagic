@@ -86,31 +86,71 @@ DT::datatable(iris, options = list(
   pageLength = 5,
   lengthMenu = c(5, 10, 15, 20)
 ))
-
+    fifelse(is.null(a),a, "", na=NA)
+    x=NULL
+    dplyr::coalesce(x, 0L)
 #COLOR BACK
-a=c("Sepal.Length", "Species")
+z=list(
+  groupBy = NULL,
+  a=list("Sepal.Length", "Species")
+)
+z
+a=c("Sepal.Lengh")
+a=list("Sepal.Length", "Species")
+length(a)
+gn=list(b=list(c,d))
+gn$b$c=a
+gn$b[["c"]]=a
+iris %>%  select(unlist(gn$b$c))
+df=iris
+try({
+  df = iris %>% select(a)},  silent = TRUE
+)
+df
 
-iris %>%  select(a)
+  
 
-
-DT::datatable(iris,  ,filter ="none", options = list( language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"),
+ DT::datatable(iris,  filter ="none", options = list( language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"),
                                                      initComplete = DT::JS("
-    function(settings, json) {
-      $(this.api().table().header()).css({
-        'background-color': '#000',
-        'color': '#fff'
-      });
-    }")
+    function(settings, json, table) {
+         console.log($(this.api().table().body()));
+        
+    }
+    
+         
+    
+    ")
 ))
 
+  $(this.api().table().header()).css({
+    'background-color': '#000',
+    'color': '#fff',
+    'border': '10px solid #000'
+  });
 
-
-datatable(iris) %>%
-  formatStyle('Sepal.Length', fontWeight = styleInterval(5, c('bold', 'weight'))) %>%
-  formatStyle('Sepal.Width',
-              color = styleInterval(3.4, c('red', 'white')),
-              backgroundColor = styleInterval(3.4, c('yellow', 'gray'))
+    headerCallback <- c(
+    "function(table, data, start, end, display){",
+    " $('table').css('border','1px solid #000');",
+    
+    "}"
   )
+  
+    DT::datatable(iris ,
+               
+                
+                options = list(headerCallback = DT::JS(headerCallback)))
+  
+  
+    #class='hover cell-border stripe',
+      a= list("compact","hover")
+DT::datatable(iris,class=a)
+
+  DT::formatStyle(colnames(iris),borderTop=DT::styleEqual(22.8,"5px solid red"))
+  DT::formatStyle(colnames(iris), fontWeight ='bold',border = '1px solid black')
+    # DT:: formatStyle('Sepal.Width',
+  #             color = styleInterval(3.4, c('red', 'white')),
+  #             backgroundColor = styleInterval(3.4, c('yellow', 'gray'))
+  # )
 
 
 #COL TYPES

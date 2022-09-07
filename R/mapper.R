@@ -17,8 +17,8 @@ tableOpts =list(
   outlined = FALSE, #?'
   bordered = FALSE, #??
   borderless = TRUE, #??
-  striped = FALSE,
-  compact = FALSE,
+  striped = TRUE,
+  compact = TRUE,
   highlight = FALSE,
   pagination = TRUE,
   showPagination = NULL,
@@ -73,7 +73,8 @@ tableOpts$height
   list_opts$general_list[["searching"]] =tableOpts$searchable
   list_opts$general_list[["selection"]]  =tableOpts$selection
   list_opts$general_list[["stripe"]]  =tableOpts$striped
-
+  list_opts$general_list[["compact"]]  =tableOpts$compact
+  
     if(tableOpts$font_wheight == "auto"){
     list_opts$table_list_css_column[["fontWeight"]]="normal"
   }else{list_opts$table_list_css_column[["fontWeight"]]=tableOpts$font_wheight }

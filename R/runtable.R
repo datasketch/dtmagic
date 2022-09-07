@@ -40,7 +40,7 @@
 #' @export
 #' @importFrom dplyr %>%
 runtable <- function(data, opts=NULL,...){
-  inner_opt = mapper(opts)
+inner_opt = mapper(opts)
   df = data 
   list_class=list()
   # class((inner_opt[1]$general_list$selection))
@@ -66,6 +66,11 @@ runtable <- function(data, opts=NULL,...){
   if(general_list$general_list$stripe ==TRUE){
     list_class = append(list_class,"stripe")
   }
+  
+  if(general_list$general_list$compact==TRUE){
+    list_class = append(list_class,"compact")
+  }
+  
    #HEADER
    if(!is.null(inner_opt[2]) & length(inner_opt[2]$table_list_css_header)  & class(inner_opt[2]$table_list_css_header)=="list"){
         ccs_list_header = utils::modifyList(table_list_css_header[1],inner_opt[2])
