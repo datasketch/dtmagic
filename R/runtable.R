@@ -41,7 +41,8 @@
 #' @importFrom dplyr %>%
 runtable <- function(data, opts=NULL,...){
   inner_opt = mapper(opts)
-  df = data  
+  df = data 
+  list_class=list()
   # class((inner_opt[1]$general_list$selection))
   #select columns, TODO generate alert
   if(!is.null(inner_opt[1]$general_list$selection)){
@@ -61,6 +62,10 @@ runtable <- function(data, opts=NULL,...){
     general_list = utils::modifyList(general_list[1],inner_opt[1])
   } else{general_list = general_list[1]}
   
+  #CLASS GENERAL
+  if(general_list$general_list$stripe ==TRUE){
+    list_class = append(list_class,"stripe")
+  }
    #HEADER
    if(!is.null(inner_opt[2]) & length(inner_opt[2]$table_list_css_header)  & class(inner_opt[2]$table_list_css_header)=="list"){
         ccs_list_header = utils::modifyList(table_list_css_header[1],inner_opt[2])
@@ -83,21 +88,43 @@ runtable <- function(data, opts=NULL,...){
    } else{ ccs_list_column_single = table_list_css_column_single[1] } 
   #library(dplyr) 
    #RUN data table
-     dt = DT::datatable(df, filter=general_list$general_list$filter,width = general_list$general_list$width,height= general_list$general_list$height, 
-                       options = list(language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
-                                      searching=general_list$general_list$searching,
-     initComplete = DT::JS(Js_init_string)
-   )) %>% 
-     DT::formatStyle( #CSS style to columns
-       columns = colnames(df),#as.vector(ccs_list_column$table_list_css_column$columns),
-       fontWeight = ccs_list_column$table_list_css_column$fontWeight,
-       color = ccs_list_column$table_list_css_column$color,
-       backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
-     )   %>% DT::formatString(columns =as.vector(ccs_list_column$table_list_css_column$columns),
-                          prefix = ccs_list_column$table_list_css_column$prefix,
-                          suffix =ccs_list_column$table_list_css_column$suffix)
+
+ if(length(list_class) >0){       
+     dt = DT::datatable(df, class = unlist(list_class), filter=general_list$general_list$filter,width = general_list$general_list$width,height= general_list$general_list$height, 
+                           options = list(language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
+                                          searching=general_list$general_list$searching,
+         initComplete = DT::JS(Js_init_string)
+       )) %>% 
+         DT::formatStyle( #CSS style to columns
+           columns = colnames(df),#as.vector(ccs_list_column$table_list_css_column$columns),
+           fontWeight = ccs_list_column$table_list_css_column$fontWeight,
+           color = ccs_list_column$table_list_css_column$color,
+           backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
+         )   %>% DT::formatString(columns =as.vector(ccs_list_column$table_list_css_column$columns),
+                              prefix = ccs_list_column$table_list_css_column$prefix,
+                              suffix =ccs_list_column$table_list_css_column$suffix)
+       
+ }
+    else{
+      
+      dt = DT::datatable(df,  filter=general_list$general_list$filter,width = general_list$general_list$width,height= general_list$general_list$height, 
+                         options = list(language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
+                                        searching=general_list$general_list$searching,
+                                        initComplete = DT::JS(Js_init_string)
+                         )) %>% 
+        DT::formatStyle( #CSS style to columns
+          columns = colnames(df),#as.vector(ccs_list_column$table_list_css_column$columns),
+          fontWeight = ccs_list_column$table_list_css_column$fontWeight,
+          color = ccs_list_column$table_list_css_column$color,
+          backgroundColor = ccs_list_column$table_list_css_column$backgroundColor
+        )   %>% DT::formatString(columns =as.vector(ccs_list_column$table_list_css_column$columns),
+                                 prefix = ccs_list_column$table_list_css_column$prefix,
+                                 suffix =ccs_list_column$table_list_css_column$suffix)
+      
+      
+    }
    
-      dt
+   
      #ADD single stylecolumns - TODO only do if oprs is !=NULL
    if(!is.null(inner_opt[5]) & length(inner_opt[5]$table_list_css_column_single) & class(inner_opt[5]$table_list_css_column_single)=="list"){
        for(i in 1:lengths(inner_opt[5])){

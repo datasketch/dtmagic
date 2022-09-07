@@ -12,12 +12,12 @@ tableOpts =list(
   height = "auto",
   font_wheight ="bold", #auto  default, option  bold
   width = "auto",
-  fullWidth = TRUE,
-  wrap = TRUE,
-  outlined = FALSE,
-  bordered = FALSE,
-  borderless = TRUE,
-  striped = TRUE,
+  fullWidth = TRUE, #??
+  wrap = TRUE, #??
+  outlined = FALSE, #?'
+  bordered = FALSE, #??
+  borderless = TRUE, #??
+  striped = FALSE,
   compact = FALSE,
   highlight = FALSE,
   pagination = TRUE,
@@ -72,7 +72,9 @@ tableOpts$height
   list_opts$general_list[["ordering"]] =tableOpts$sortable
   list_opts$general_list[["searching"]] =tableOpts$searchable
   list_opts$general_list[["selection"]]  =tableOpts$selection
-  if(tableOpts$font_wheight == "auto"){
+  list_opts$general_list[["stripe"]]  =tableOpts$striped
+
+    if(tableOpts$font_wheight == "auto"){
     list_opts$table_list_css_column[["fontWeight"]]="normal"
   }else{list_opts$table_list_css_column[["fontWeight"]]=tableOpts$font_wheight }
   # print("seledction")
