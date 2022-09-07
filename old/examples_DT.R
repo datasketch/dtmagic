@@ -88,6 +88,9 @@ DT::datatable(iris, options = list(
 ))
 
 #COLOR BACK
+a=c("Sepal.Length", "Species")
+
+iris %>%  select(a)
 
 
 DT::datatable(iris,  ,filter ="none", options = list( language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"),

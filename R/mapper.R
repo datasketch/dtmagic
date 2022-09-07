@@ -1,12 +1,12 @@
 #from https://github.com/datasketch/dsvizopts/blob/master/R/options.R
 #Human behavior inputs
-tableOpts <- list(
+tableOpts =list(
   groupBy = NULL,
   sortable = FALSE,
   resizable = FALSE,
   filterable = FALSE, #"none", "bottom", "top"
   searchable = TRUE,
-  selection = NULL,
+  selection = list("Sepal.Length", "Species"),  #list input with colnames or NIULL
   showSortIcon = TRUE,
   showSortable =  TRUE,
   height = "auto",
@@ -49,7 +49,7 @@ tableOpts <- list(
 # print(sketch)
 
 tableOpts$height
-mapper <- function(tableOpts){ 
+  mapper <- function(tableOpts){ 
   
   list_opts = list(
     #general options
@@ -71,8 +71,11 @@ mapper <- function(tableOpts){
   list_opts$general_list[["height"]] =tableOpts$height
   list_opts$general_list[["ordering"]] =tableOpts$sortable
   list_opts$general_list[["searching"]] =tableOpts$searchable
-  
-  #update 
+  list_opts$general_list[["selection"]]  =tableOpts$selection
+  # print("seledction")
+  # print(tableOpts$selection)
+  # print(list_opts$general_list[["selection"]])
+  # #update 
   print(tableOpts$filterable )
   if(tableOpts$filterable == FALSE){
     list_opts$general_list[["filter"]] = "none"

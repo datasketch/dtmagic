@@ -42,6 +42,15 @@
 runtable <- function(data, opts=NULL,...){
   inner_opt = mapper(opts)
   df = data  
+  class((inner_opt[1]$general_list$selection))
+  #select columns, TODO generate alert
+  if(!is.null(inner_opt[1]$general_list$selection)){
+    try({
+      df = df %>% select(unlist(inner_opt[1]$general_list$selection))
+      }, silent=TRUE
+    )
+  }
+  
   
   #GENERAL OPTIONS
   if(!is.null(inner_opt[1]$general_list$language) & length(inner_opt[1]$general_list)){
@@ -88,7 +97,7 @@ runtable <- function(data, opts=NULL,...){
                           prefix = ccs_list_column$table_list_css_column$prefix,
                           suffix =ccs_list_column$table_list_css_column$suffix)
    
-      dt
+      #dt
      #ADD single stylecolumns - TODO only do if oprs is !=NULL
    if(!is.null(inner_opt[5]) & length(inner_opt[5]$table_list_css_column_single) & class(inner_opt[5]$table_list_css_column_single)=="list"){
        for(i in 1:lengths(inner_opt[5])){
