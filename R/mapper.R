@@ -4,8 +4,8 @@ tableOpts <- list(
   groupBy = NULL,
   sortable = FALSE,
   resizable = FALSE,
-  filterable = TRUE, #"none", "bottom", "top"
-  searchable = FALSE,
+  filterable = FALSE, #"none", "bottom", "top"
+  searchable = TRUE,
   selection = NULL,
   showSortIcon = TRUE,
   showSortable =  TRUE,
@@ -70,14 +70,14 @@ mapper <- function(tableOpts){
   list_opts$general_list[["width"]] =tableOpts$width
   list_opts$general_list[["height"]] =tableOpts$height
   list_opts$general_list[["ordering"]] =tableOpts$sortable
+  list_opts$general_list[["searching"]] =tableOpts$searchable
+  
   #update 
   print(tableOpts$filterable )
   if(tableOpts$filterable == FALSE){
-    print("noooooooooooon")
     list_opts$general_list[["filter"]] = "none"
   }
   else{list_opts$general_list[["filter"]] = "top"}
-  
   
   list_opts
   print(list_opts)

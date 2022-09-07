@@ -81,7 +81,8 @@ str=str_replace_all(str,"\n","")
 
   #library(DT)
 DT::datatable(iris, options = list(
-  searching = FALSE,
+  searching =FALSE,
+  
   pageLength = 5,
   lengthMenu = c(5, 10, 15, 20)
 ))
@@ -89,8 +90,8 @@ DT::datatable(iris, options = list(
 #COLOR BACK
 
 
-DT::datatable(iris, options = list( language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"),
-  initComplete = DT::JS("
+DT::datatable(iris,  ,filter ="none", options = list( language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"),
+                                                     initComplete = DT::JS("
     function(settings, json) {
       $(this.api().table().header()).css({
         'background-color': '#000',
@@ -98,6 +99,7 @@ DT::datatable(iris, options = list( language = list(url = "//cdn.datatables.net/
       });
     }")
 ))
+
 
 
 datatable(iris) %>%
@@ -214,7 +216,7 @@ DT:: datatable(df) %>% DT::formatStyle(
  
   DT::datatable(
    data=iris,
-   options = list(options_DT,
+   options = list(searching =TRUE,
      initComplete = DT::JS(
        "function(settings, json) {",
        "$(this.api().table().header()).css({'color': '#AAA'});",
