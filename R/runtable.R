@@ -42,7 +42,7 @@
 runtable <- function(data, opts=NULL,...){
   inner_opt = mapper(opts)
   df = data  
-  class((inner_opt[1]$general_list$selection))
+  # class((inner_opt[1]$general_list$selection))
   #select columns, TODO generate alert
   if(!is.null(inner_opt[1]$general_list$selection)){
     try({
