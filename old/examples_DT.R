@@ -110,7 +110,7 @@ df
 
   
 
- DT::datatable(iris,  filter ="none", options = list( language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"),
+ DT::datatable(iris,  filter ="none", options = list( paging=FALSE,language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"),
                                                      initComplete = DT::JS("
     function(settings, json, table) {
          console.log($(this.api().table().body()));

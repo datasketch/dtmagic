@@ -20,7 +20,7 @@ tableOpts =list(
   striped = TRUE,
   compact = TRUE,
   highlight = FALSE,
-  pagination = TRUE,
+  pagination = FALSE,
   showPagination = NULL,
   showPageInfo = TRUE,
   showPageSizeOptions = FALSE,
@@ -74,7 +74,8 @@ tableOpts$height
   list_opts$general_list[["selection"]]  =tableOpts$selection
   list_opts$general_list[["stripe"]]  =tableOpts$striped
   list_opts$general_list[["compact"]]  =tableOpts$compact
-  
+  list_opts$general_list[["hover"]]  =tableOpts$highlight
+  list_opts$general_list[["paging"]]  =tableOpts$pagination
   if(tableOpts$font_wheight == "auto"){
     list_opts$table_list_css_column[["fontWeight"]]="normal"
   }else{list_opts$table_list_css_column[["fontWeight"]]=tableOpts$font_wheight }

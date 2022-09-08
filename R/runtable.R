@@ -71,6 +71,10 @@ inner_opt = mapper(opts)
     list_class = append(list_class,"compact")
   }
   
+  if(general_list$general_list$hover==TRUE){
+    list_class = append(list_class,"hover")
+  }
+  
    #HEADER
    if(!is.null(inner_opt[2]) & length(inner_opt[2]$table_list_css_header)  & class(inner_opt[2]$table_list_css_header)=="list"){
         ccs_list_header = utils::modifyList(table_list_css_header[1],inner_opt[2])
@@ -99,8 +103,9 @@ inner_opt = mapper(opts)
    
  if(length(list_class) >0){       
      dt = DT::datatable(df, class = unlist(list_class), filter=general_list$general_list$filter,width = general_list$general_list$width,height= general_list$general_list$height, 
-                           options = list(language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
+                           options = list( language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
                                           searching=general_list$general_list$searching,
+                                          paging=general_list$general_list$paging,
          initComplete = DT::JS(Js_init_string)
        )) %>% 
          DT::formatStyle( #CSS style to columns
@@ -119,6 +124,7 @@ inner_opt = mapper(opts)
       dt = DT::datatable(df,  filter=general_list$general_list$filter,width = general_list$general_list$width,height= general_list$general_list$height, 
                          options = list(language =   list(url=lenguage_s), ordering=general_list$general_list$ordering, 
                                         searching=general_list$general_list$searching,
+                                        paging=general_list$general_list$paging,
                                         initComplete = DT::JS(Js_init_string)
                          )) %>% 
         DT::formatStyle( #CSS style to columns
